@@ -1,0 +1,120 @@
+<!-- 
+<div class="loader" [style.display]="displayloader">
+  <img class="loaderimg" src="https://flevix.com/wp-content/uploads/2020/02/Loading-Image.gif" alt="didntfind">
+</div> -->
+<br>
+
+
+<ngx-spinner></ngx-spinner>
+<app-navbar></app-navbar>
+
+
+    <br>
+<div class="row">
+  <div class="col-md-6" style="padding: 3%;" >
+    <div class="table-responsive custom-table-responsive"  style="position: relative; margin-right: 20px;">
+      <h1 style="color: orange;">Risk analysis</h1>
+    <br>
+    <br>
+      <table class="table custom-table" style="min-width: 0px;">
+        
+        <tbody>
+          
+              <tr scope="row" >
+
+                  <!-- <th scope="row">
+                    <label class="control control--checkbox">
+                      <input type="checkbox"/>
+                      <div class="control__indicator"></div>
+                    </label>
+                  </th> -->
+                  
+                  <td style="color: white">
+                  Risk Pecentage
+              
+                  </td>
+                  <td>
+                    {{riskvalue}}%
+                  </td>
+                  
+                </tr>
+    
+                <tr class="spacer"><td colspan="100"></td></tr>
+                
+                <tr scope="row" >
+
+                  <!-- <th scope="row">
+                    <label class="control control--checkbox">
+                      <input type="checkbox"/>
+                      <div class="control__indicator"></div>
+                    </label>
+                  </th> -->
+                  
+                  <td style="color: white">
+                    Date Assesed
+              
+                  </td>
+                  <td>
+                    {{riskassesseddate}}
+                  </td>
+                  
+                </tr>
+
+                <tr class="spacer"><td colspan="100"></td></tr>
+                
+                <tr scope="row" >
+
+                  <!-- <th scope="row">
+                    <label class="control control--checkbox">
+                      <input type="checkbox"/>
+                      <div class="control__indicator"></div>
+                    </label>
+                  </th> -->
+                  
+                  <td style="color: white">
+                    Collateral Id
+              
+                  </td>
+                  <td>
+                    {{collateralId}}
+                  </td>
+                  
+                </tr>
+          
+        </tbody>
+      </table>
+    </div>
+
+      <button class="btn-get-started animate__animated animate__fadeInUp scrollto" ><a routerLink="/Home" style="color: white;">Return to list</a>
+      </button>
+      <button class="btn-get-started animate__animated animate__fadeInUp scrollto" (click)="update()" ><a style="color: white;">Calculate current risk</a></button>
+    </div>
+        
+      
+
+  
+  <div class="col-md-6" >
+
+
+
+    
+    <div class="biggerbox" [ngStyle]="bigboxstyle"> 
+      <div class="box">
+        <div class="percent">
+          <svg >
+            <circle cx="70" cy="70" r="70"></circle>
+            <circle cx="70" cy="70" r="70" [style.stroke]="secondaryBackgroundcolor" [style.stroke-dashoffset]="(440 - (440 * riskvalue) / 100)"></circle>
+          </svg>
+          <div class="num">
+            <h2 [style.color]="secondaryBackgroundcolor">{{riskvalue}}<span>%</span></h2>
+          </div>
+        </div>
+        <h2 class="text">Risk</h2>
+        <h4 [ngStyle]="riskcategorystyle">{{riskcategorytext}}</h4>
+      </div>
+    
+    </div>
+  </div>
+</div>
+
+  

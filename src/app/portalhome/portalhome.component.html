@@ -1,0 +1,149 @@
+
+<ngx-spinner></ngx-spinner>
+
+<br>
+
+
+<nav class="navbar container " >
+  <a class="navbar-brand h2" routerLink="/Home" style="visibility: hidden;">Home</a>
+
+    <a class="navbar-brand h2" (click)=logout() style="cursor:pointer" >Logout</a>
+
+</nav>
+
+    <br>
+    <h1 class="mb-5" style="color: orange; text-align: center;">List of all Sanctioned Loans</h1>
+    
+    <div class="container">
+
+      
+      <div class="row crow" style="display: flex; align-items: center; text-align: center;">
+        <div class="col-md-4">
+            <input type="number" max="999999" class="searchip form-group"  placeholder="LoanId" [(ngModel)]="searchloanid" #loanid="ngModel">
+            
+        </div>
+        <div class="col-md-4">
+            <input  type="number" max="999999" class="searchip form-group" placeholder="CustomerId" [(ngModel)]="searchcustomerid">
+        </div>
+    
+        <div class="col-md-4">
+          <button class="btn-get-started" style="width: 80%;" (click)="startsearch()">Search </button>
+        </div>
+    </div>
+    <div class="row alertrow " style="display: none; align-items:center" id="alerts">
+   
+     <h2>{{alertmessage}}</h2> 
+    </div>
+
+    <div class="table-responsive custom-table-responsive" style="margin-top: 5%;" *ngIf="itemsearchdone">
+
+      <table class="table custom-table">
+      <tbody>
+        <tr scope="row" style="font-size:1.2rem; font-weight: bold;">
+
+          <td style="text-align: center; color:white ">
+            {{itemsearch.loanId}}
+          </td>
+          <td style="text-align: center; color:white">{{itemsearch.name}}</td>
+          <td style="text-align: center; color:white">
+            {{itemsearch.accountNumber}}
+          </td>
+          <td style="text-align: center; color:white">
+            {{itemsearch.sanctionedLoan}}
+          </td>
+          <td style="text-align: center; color:white">{{itemsearch.emi}}</td>
+
+          <td style="text-align: center; color:white"  ><a  ><i  *ngIf="!itemsearch.isCollateralIssued" class="fas fa-exclamation-triangle fa-2x collateralwicon" onclick="expanddetails(event)"></i><i *ngIf="itemsearch.isCollateralIssued" class="fas fa-check-square fa-2x" onclick="expanddetails(event)" style="color: greenyellow;"> </i></a></td>
+          
+        </tr>
+
+        <tr scope="row" >
+            <td colspan="100" style="background-color:#4a3d26;" class="alerter">
+            <div class="row" >
+                <div class="col-md-10" style="padding: 0px 0px 0px 40px;">
+                    <h4 style="color: orange;">
+                        Collateral
+                    </h4>
+                   <h6 style="color: white;">{{itemsearch.collateralDescription}}</h6> 
+                </div>
+                <div class="col-md-2" style="display: flex; text-align: center;">
+                    <button class="btn" style="align-self: auto; background-color: red; color: white; width: 11rem;"  *ngIf="!itemsearch.isCollateralIssued" ><a routerLink="/submitcollateral" (click)="senddets(itemsearch.collateralDescription,itemsearch.loanId,itemsearch.customerId,itemsearch.collateralId)" style="color: white;">Submit collateral</a></button>
+                    <button class="btn" style="align-self: auto; background-color: green; color: white; width: 11rem"  *ngIf="itemsearch.isCollateralIssued" routerLink="/Risk" (click)="senddatatoriskassess(itemsearch.collateralId)">  Risk Analysis     </button>
+                </div>
+            </div>
+        </td>
+        
+    </tr>
+      </tbody>  
+      </table>
+        </div>
+
+      <div class="table-responsive custom-table-responsive">
+
+        <table class="table custom-table" style="margin-top: 5%;">
+          <thead style="font-size: 1.2rem;">
+            <tr>  
+
+         
+              
+              <th scope="col" style="text-align: center;">Loan ID</th>
+              <th scope="col" style="text-align: center;">Name</th>
+              <th scope="col" style="text-align: center;">Account Number</th>
+              <th scope="col" style="text-align: center;">Sanctioned Loan Amount</th>
+              <th scope="col" style="text-align: center;">EMI</th>
+              <th scope="col" style="text-align: center;">Collateral</th>
+            </tr>
+          </thead>
+
+          <tbody>
+              <ng-template  ngFor let-item [ngForOf]="items" let-i="index">
+                <tr scope="row" style="font-size:1.2rem; font-weight: bold;">
+
+                    <td style="text-align: center; color:white ">
+                      {{item.loanId}}
+                    </td>
+                    <td style="text-align: center; color:white">{{item.name}}</td>
+                    <td style="text-align: center; color:white">
+                      {{item.accountNumber}}
+                    </td>
+                    <td style="text-align: center; color:white">
+                      {{item.sanctionedLoan}}
+                    </td>
+                    <td style="text-align: center; color:white">{{item.emi}}</td>
+          
+                    <td style="text-align: center; color:white"  ><a  ><i  *ngIf="!item.isCollateralIssued" class="fas fa-exclamation-triangle fa-2x collateralwicon" onclick="expanddetails(event)"></i><i *ngIf="item.isCollateralIssued" class="fas fa-check-square fa-2x" onclick="expanddetails(event)" style="color: greenyellow;"> </i></a></td>
+                    
+                  </tr>
+      
+                  <tr scope="row" >
+                      <td colspan="100" style="background-color:#4a3d26;" class="alerter">
+                      <div class="row" >
+                          <div class="col-md-10" style="padding: 0px 0px 0px 40px;">
+                              <h4 style="color: orange;">
+                                  Collateral
+                              </h4>
+                             <h6 style="color: white;">{{item.collateralDescription}}</h6> 
+                          </div>
+                          <div class="col-md-2" style="display: flex; text-align: center;">
+                              <button class="btn" style="align-self: auto; background-color: red; color: white; width: 11rem;"  *ngIf="!item.isCollateralIssued" ><a routerLink="/submitcollateral" (click)="senddets(item.collateralDescription,item.loanId,item.customerId,item.collateralId)" style="color: white;">Submit collateral</a></button>
+                              <button class="btn" style="align-self: auto; background-color: green; color: white; width: 11rem"  *ngIf="item.isCollateralIssued" routerLink="/Risk" (click)="senddatatoriskassess(item.collateralId)">  Risk Analysis     </button>
+                          </div>
+                      </div>
+                  </td>
+                  
+              </tr>
+
+              <tr class="spacer"><td colspan="100"></td></tr>
+              </ng-template>
+            
+
+            
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    
+
+    
+ 

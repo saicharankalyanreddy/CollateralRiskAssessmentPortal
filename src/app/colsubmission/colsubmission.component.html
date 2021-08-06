@@ -1,0 +1,517 @@
+<ngx-spinner></ngx-spinner>
+
+<br>
+
+
+
+<app-navbar></app-navbar>
+
+<br>
+<div class="fullsubmit" id="full">
+    <h1> Collateral Successfully Saved!</h1>
+    <div style="text-align: center;">
+        <button class="btn-get-started animate__animated animate__fadeInUp scrollto" ><a routerLink="/Home" style="color: white;">Return to list</a>
+            </button>
+
+
+    </div>
+</div>
+
+
+
+<div class="container" id="fullcontainer">
+
+    <form #form="ngForm" (ngSubmit)="submitform(form.value)">
+
+        <div class="row" style="text-align: center;">
+            <h1 style="color: orange; text-align: center; padding-bottom: 8%;">Form for collateral submission</h1>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="table-responsive custom-table-responsive" style="position: relative; margin-right: 20px;">
+
+                    <table class="table custom-table" style="min-width: 0px;">
+                        <thead>
+
+                            <th scope="col">
+                                <h2>Collateral Description</h2>
+                            </th>
+
+                        </thead>
+                        <tbody>
+
+                            <tr scope="row">
+                                <td style="padding: 10%; color: white">
+                                    {{collateral_description}}
+
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-md-6">
+
+
+
+                <div class="table-responsive custom-table-responsive">
+
+                    <table class="table custom-table" style="min-width: 0px;">
+                        <thead>
+                            <tr>
+
+                                <th scope="col">
+                                    <h2>Fill according to reference</h2>
+                                </th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            <tr scope="row">
+                                <td>
+                                    <label for="collateraltype">Collateral Type</label>
+                                </td>
+                                <td style="text-align: center;">
+                                    <select class="form-select" [(ngModel)]="selectvalue" id="typ" name="typ">
+                                        <option selected>select type</option>
+                                        <option value="1">Land</option>
+                                        <option value="2">House</option>
+                                        <option value="4">Gold</option>
+                                    </select>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="loanid">Loan ID</label>
+                                </td>
+                                <td>
+                                    <input type="number" [placeholder]="collateral_loanid" style="text-align: center;"
+                                        class="form-control" id="loanid" name="loanid" [value]="collateral_loanid"
+                                        disabled>
+                                </td>
+                            </tr>
+
+
+                            <tr class="spacer">
+                                <td colspan="100"></td>
+                            </tr>
+
+                            <ng-template [ngIf]="selectvalue==1">
+                                <th>
+                                    <h2>Property</h2>
+                                </th>
+                                <tr>
+                                    <td>
+                                        <label for="pn">Property Owner Name</label>
+                                    </td>
+                                    <td>
+                                        <input type="text" placeholder="Owner Name" class="form-control"
+                                            [(ngModel)]="formdata.pn" id="pn" name="pn" #pn="ngModel" required>
+                                        <span *ngIf="pn.invalid && (pn.dirty || pn.touched)" class="text-danger mt-1">
+
+                                            <span *ngIf="pn.errors?.required">
+                                                Land Owner Name is Required.
+                                            </span>
+
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label for="pa">Address</label>
+                                    </td>
+                                    <td>
+                                        <input type="text" placeholder="Address" class="form-control"
+                                            [(ngModel)]="formdata.pa" id="pa" name="pa" #pa="ngModel" required>
+                                        <span *ngIf="pa.invalid && (pa.dirty || pa.touched)" class="text-danger mt-1">
+
+                                            <span *ngIf="pa.errors?.required">
+                                                Address is Required
+                                            </span>
+
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label for="pa">Pledged Date</label>
+                                    </td>
+                                    <td>
+                                        <input type="date" placeholder="Pledged Date" class="form-control Pledgeddate"
+                                            [(ngModel)]="formdata.propertypledged " id="propertypledged" min="{{today}}"
+                                            name="propertypledged" #propertypledged="ngModel" required>
+                                        <span
+                                            *ngIf="propertypledged.invalid && (propertypledged.dirty || propertypledged.touched)"
+                                            class="text-danger mt-1">
+
+                                            <span *ngIf="propertypledged.errors?.required">
+                                                Pledged Date is Required
+                                            </span>
+
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label for="parea">Area of the Propery</label>
+                                    </td>
+                                    <td>
+                                        <input type="number" placeholder="Area of the Land" class="form-control"
+                                            [(ngModel)]="formdata.parea" id="parea" name="parea" #parea="ngModel"
+                                            required>
+                                        <span *ngIf="parea.invalid && (parea.dirty || parea.touched)"
+                                            class="text-danger mt-1">
+
+                                            <span *ngIf="parea.errors?.required">
+                                               Area is Required
+                                            </span>
+
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label for="pc">Current value in Rs per Sqfeet</label>
+                                    </td>
+                                    <td>
+                                        <input type="number" placeholder="Current market value" class="form-control"
+                                            [(ngModel)]="formdata.pc" id="pc" name="pc" #pc="ngModel" required>
+
+                                        <span *ngIf="pc.invalid && (pc.dirty || pc.touched)" class="text-danger mt-1">
+
+                                            <span *ngIf="pc.errors?.required">
+                                                Current Value is Required
+                                            </span>
+
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label for="pc">Depreciation Rate</label>
+                                    </td>
+                                    <td>
+                                        <input type="number" placeholder="Dep rate" class="form-control"
+                                            [(ngModel)]="formdata.pd" id="pd" name="pd" #pd="ngModel" required>
+                                        <span *ngIf="pd.invalid && (pd.dirty || pd.touched)" class="text-danger mt-1">
+
+                                            <span *ngIf="pd.errors?.required">
+                                                Depreciation Rate is Required
+                                            </span>
+
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label for="propertyyear">Year in which property bought/obtained</label>
+                                    </td>
+                                    <td>
+                                        <input type="number" placeholder="Purchased year" class="form-control"
+                                            [(ngModel)]="formdata.propertyyear" id="propertyyear" name="propertyyear" #propertyyear="ngModel" required>
+                                        <span *ngIf="propertyyear.invalid && (propertyyear.dirty || propertyyear.touched)" class="text-danger mt-1">
+
+                                            <span *ngIf="propertyyear.errors?.required">
+                                                Year is Required
+                                            </span>
+
+                                        </span>
+                                    </td>
+                                </tr>
+                            </ng-template>
+
+                            <ng-template [ngIf]="selectvalue==2">
+                                <th>
+                                    <h2>House</h2>
+                                </th>
+                                <tr>
+                                    <td>
+                                        <label for="hn">House Owner Name</label>
+                                    </td>
+                                    <td>
+                                        <input type="text" placeholder="Owner Name" class="form-control"
+                                            [(ngModel)]="formdata.hn" id="hn" name="hn" #hn="ngModel" required>
+                                        <span *ngIf="hn.invalid && (hn.dirty || hn.touched)" class="text-danger mt-1">
+
+                                            <span *ngIf="hn.errors?.required">
+                                                House owner Name is Required
+                                            </span>
+
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label for="ha">Address</label>
+                                    </td>
+                                    <td>
+                                        <input type="text" placeholder="Address" class="form-control"
+                                            [(ngModel)]="formdata.ha" id="ha" name="ha" #ha="ngModel" required>
+                                        <span *ngIf="ha.invalid && (ha.dirty || ha.touched)" class="text-danger mt-1">
+
+                                            <span *ngIf="ha.errors?.required">
+                                                Address is Required
+                                            </span>
+
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label for="pa">Pledged Date</label>
+                                    </td>
+                                    <td>
+                                        <input type="date" placeholder="Pledged Date" class="form-control Pledgeddate"
+                                            [(ngModel)]="formdata.housepledged " id="pledgeddate" required  min="{{today}}"
+                                            name="pledgeddate" #pledgeddate="ngModel" required>
+                                        <span *ngIf="pledgeddate.invalid && (pledgeddate.dirty || pledgeddate.touched)"
+                                            class="text-danger mt-1">
+
+                                            <span *ngIf="pledgeddate.errors?.required">
+                                                Pledge Date Field is Required.
+                                            </span>
+                                            <span *ngIf="pledgeddate.errors?.min">
+                                               Date Invalid
+                                            </span>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label for="pc">Area of the House</label>
+                                    </td>
+                                    <td>
+                                        <input type="number" placeholder="Area of the House" class="form-control"
+                                            [(ngModel)]="formdata.harea" id="housearea" name="housearea" required
+                                            #housearea="ngModel" required>
+                                        <span *ngIf="housearea.invalid && (housearea.dirty || housearea.touched)"
+                                            class="text-danger mt-1">
+
+                                            <span *ngIf="housearea.errors?.required">
+                                                Area of the House is Required
+                                            </span>
+
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label for="pc">year in House Built </label>
+                                    </td>
+                                    <td>
+                                        <input type="number" placeholder="Year in House Built" class="form-control"
+                                            [(ngModel)]="formdata.hyear" id="yearbuilt" name="yearbuilt"
+                                            #yearbuilt="ngModel" required>
+                                        <span *ngIf="yearbuilt.invalid && (yearbuilt.dirty || yearbuilt.touched)"
+                                            class="text-danger mt-1">
+
+                                            <span *ngIf="yearbuilt.errors?.required">
+                                                Year is Required
+                                            </span>
+
+                                        </span>
+
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <label for="pc">Current value in Rs per Sqfeet</label>
+                                    </td>
+                                    <td>
+                                        <input type="number" placeholder="Current market value per Squarefeet"
+                                            class="form-control" [(ngModel)]="formdata.hc" id="hc" name="hc"
+                                            #hc="ngModel" required>
+                                        <span *ngIf="hc.invalid && (hc.dirty || hc.touched)" class="text-danger mt-1">
+
+                                            <span *ngIf="hc.errors?.required">
+                                                Current Value is Required
+                                            </span>
+
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label for="pc">Current Structure Value</label>
+                                    </td>
+                                    <td>
+                                        <input type="number" placeholder="Initial Structure Value" class="form-control"
+                                            [(ngModel)]="formdata.currentstructurevalue" id="structurevalue"
+                                            name="structurevalue" required #structurevalue="ngModel">
+                                        <span
+                                            *ngIf="structurevalue.invalid && (structurevalue.dirty || structurevalue.touched)"
+                                            class="text-danger mt-1">
+
+                                            <span *ngIf="structurevalue.errors?.required">
+                                                Structure Price is Required
+                                            </span>
+
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label for="pc">Depreciation Rate</label>
+                                    </td>
+                                    <td>
+                                        <input type="number" placeholder="Depreciation Rate" class="form-control"
+                                            [(ngModel)]="formdata.hd" id="housedepriciation" name="housedepriciation"
+                                            #housedepriciation="ngModel" required>
+                                        <span
+                                            *ngIf="housedepriciation.invalid && (housedepriciation.dirty || housedepriciation.touched)"
+                                            class="text-danger mt-1">
+
+                                            <span *ngIf="housedepriciation.errors?.required">
+                                                Depreciation Rate is Required
+                                            </span>
+
+                                        </span>
+                                    </td>
+                                </tr>
+
+                            </ng-template>
+
+
+                            <ng-template [ngIf]="selectvalue==4">
+                                <th>
+                                    <h2>Gold</h2>
+                                </th>
+                                <tr>
+                                    <td>
+                                        <label for="pn">Gold source Name</label>
+                                    </td>
+                                    <td>
+                                        <input type="text" placeholder="Owner Name" [(ngModel)]="formdata.gn"
+                                            class="form-control" name="gn" id="gn" #gn="ngModel" required minlength="3">
+                                        <span *ngIf="gn.invalid && (gn.dirty || gn.touched)" class="text-danger mt-1">
+
+                                            <span *ngIf="gn.errors?.required">
+                                                Name is required.
+                                            </span>
+                                            <span *ngIf="gn.errors?.minlength">
+                                                Name must be at least 3 characters long.
+                                            </span>
+                                        </span>
+                                    </td>
+                                </tr>
+
+
+
+                                <tr>
+                                    <td>
+                                        <label for="pa">Weight in grams</label>
+                                    </td>
+                                    <td>
+                                        <input type="number" placeholder="Weight" class="form-control"
+                                            [(ngModel)]="formdata.ga" id="ga" name="ga" required min="10" #ga="ngModel">
+
+                                        <span *ngIf="ga.invalid && (ga.dirty || ga.touched)" class="text-danger mt-1">
+
+                                            <span *ngIf="ga.errors?.required">
+                                                Weight is required.
+                                            </span>
+                                            <span *ngIf="ga.errors?.min">
+                                                Weight must be atleast 10 grams
+                                            </span>
+                                        </span>
+
+
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <label for="pc">Depreciation Rate</label>
+                                    </td>
+                                    <td>
+                                        <input type="number" placeholder="Depreciation Rate" class="form-control"
+                                            [(ngModel)]="formdata.golddepreciation" name="gd" required #gd="ngModel">
+                                        <span *ngIf="gd.invalid && (gd.dirty || gd.touched)" class="text-danger mt-1">
+
+                                            <span *ngIf="gd.errors?.required">
+                                                Depreciation Rate is Required.
+                                            </span>
+
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label for="pa">Pledged Date</label>
+                                    </td>
+                                    <td>
+                                        <input type="date" placeholder="Pledged Date" class="form-control Pledgeddate" required
+                                            [(ngModel)]="formdata.goldpledged " name="pledgeddate"  min="{{today}}"
+                                            #pledgeddate="ngModel">
+                                        <span *ngIf="pledgeddate.invalid && (pledgeddate.dirty || pledgeddate.touched)"
+                                            class="text-danger mt-1">
+
+                                            <span *ngIf="pledgeddate.errors?.required">
+                                                Pledged Date is Required.
+                                            </span>
+
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label for="pc">Current value in Rs per Gram</label>
+                                    </td>
+                                    <td>
+                                        <input type="number" placeholder="Current market value" class="form-control"
+                                            [(ngModel)]="formdata.gc" id="gc" name="gc" #gc="ngModel">
+                                        <span *ngIf="gc.invalid && (gc.dirty || gc.touched)" class="text-danger mt-1">
+
+                                            <span *ngIf="gc.errors?.required">
+                                               Current Value is Required
+                                            </span>
+
+                                        </span>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <label for="goldyear">Year in which gold bought</label>
+                                    </td>
+                                    <td>
+                                        <input type="number" placeholder="Year bought" class="form-control"
+                                            [(ngModel)]="formdata.goldyear" id="goldyear" name="goldyear" #goldyear="ngModel" required>
+                                        <span *ngIf="goldyear.invalid && (goldyear.dirty || goldyear.touched)" class="text-danger mt-1">
+
+                                            <span *ngIf="goldyear.errors?.required">
+                                                Year is Required
+                                            </span>
+
+                                        </span>
+                                    </td>
+                                </tr>
+                            </ng-template>
+
+
+
+
+
+                        </tbody>
+                    </table>
+
+
+
+                </div>
+                <div class="row" style="padding-top: 8%; text-align: center; margin: 1%;">
+
+                    <button type="submit" class="btn-get-started animate__animated animate__fadeInUp scrollto" [disabled]="form.invalid"                        style="padding: 32px 60px; text-align: center;">Submit Collateral
+                    </button>
+
+                </div>
+
+            </div>
+        </div>
+    </form>
+</div>
+{{formdata.pa}}
+{{value}}

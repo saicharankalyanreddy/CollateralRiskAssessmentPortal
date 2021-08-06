@@ -1,0 +1,50 @@
+
+<ngx-spinner></ngx-spinner>
+<form  #form="ngForm" (submit)="onSubmit(form)">
+  <!-- ======= Hero Section ======= -->
+  <section id="hero" class="d-flex flex-column justify-content-end align-items-center" >
+    
+    <div id="heroCarousel" data-bs-interval="5000" class="container carousel carousel-fade" data-bs-ride="carousel">
+      <!-- Slide 1 -->
+      <div class="carousel-item active">
+        <div class="carousel-container">
+          <h1 class="animate__animated animate__fadeInDown" style="color: paleturquoise; font-size: 3rem;">Welcome to <span style="color: orange;">vcvg Loans</span></h1>
+          <h6 class="animate__animated fanimate__adeInUp" style="color: white; margin-top: 10px;  font-size: 1.4rem; margin-bottom: 30px;">Collateral Risk Assessment Portal</h6>
+          
+          <a class="btn-get-started animate__animated animate__fadeInUp scrollto" style="padding: 32px 112px;" onclick="LoginDisappear()">Login</a>
+          <p class="animate__animated fanimate__adeInUp " style="margin-top: 40px; font-size: 0.9rem;">If you are an authorized back office staff please proceed to the login page for managing collaterals...</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" style="width:100%; display: none;">
+   
+      </div>
+    <div class="row" style="height: 70vh; width:80%;  display: none;" id="login">
+     <div style="display: flex; align-items: center; justify-content: center;">
+      <h1 style="color: orange; font-size: 3rem;"><span style="color: paleturquoise;">vcvg</span> Loans</h1>
+      
+     </div>
+      <div class="col-md-4" style="align-self: center;">
+          <label for="usernameinput" style="color: #fff;"><h1>Username</h1></label>
+          <input required class="form-control" type="text" name="name"  #name="ngModel" [(ngModel)]="Login.username" placeholder="username" id="usernameinput" #username required>
+         
+        </div>
+        <div class="col-md-4" style="align-self: center;">
+          <label for="passwordinput" style="color: #fff;"><h1>Password</h1></label>
+          <input required class="form-control" type="password" name="password" #password="ngModel" [(ngModel)]="Login.password" placeholder="password" id="passwordinput" required>
+         
+        </div>
+        
+        <div class="col-md-4" style="align-self: center; margin-top: 45px; ">
+          <button class="btn-get-started animate__animated animate__fadeInUp scrollto" style="padding: 32px 112px; margin-top: 1rem;" >Login</button>
+        </div>
+    </div>
+    
+  
+      
+
+
+
+  </section><!-- End Hero -->
+</form>

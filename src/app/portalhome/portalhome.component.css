@@ -1,0 +1,59 @@
+.collateralwicon
+{
+    color: red;
+} 
+
+.collateralwicon:hover {
+    color: palegoldenrod;
+}
+
+.alerter{
+    display: none;
+}
+
+.searchip 
+{
+    width: 90%;
+
+    height: 2.5rem;
+    padding: 5%;
+}
+
+.crow{
+    margin-top: 5rem;
+    /* margin-bottom: 5rem; */
+}
+
+.alertrow
+{
+    text-align: center;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    background-color: red;
+    height: 3rem;
+
+
+}
+.btn-get-started {
+    font-family: "Raleway", sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 1px;
+    display: inline-block;
+    padding: 12px 32px;
+    border-radius: 50px;
+    transition: 0.5s;
+    line-height: 1;
+    margin: 10px;
+    color: #fff;
+    -webkit-animation-delay: 0.8s;
+    animation-delay: 0.8s;
+    border: 2px solid #ef6603;
+    background-color: #33364a;
+}
+
+.btn-get-started:hover {
+    background: #ef6603;
+    color: #fff;
+    text-decoration: none;
+}
